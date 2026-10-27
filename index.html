@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ff">
+  <title>어서오세요</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+      color: #28243b;
+      background: #f5f3ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: radial-gradient(ellipse at 15% 10%, #e7e3ff 0, transparent 42%),
+                  radial-gradient(ellipse at 90% 90%, #ffe9e0 0, transparent 38%), #f8f7fc;
+    }
+    main {
+      width: min(100%, 460px);
+      padding: 48px 40px 42px;
+      text-align: center;
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid rgba(255, 255, 255, .9);
+      border-radius: 28px;
+      box-shadow: 0 24px 70px rgba(55, 42, 99, .12);
+    }
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 24px;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 28px;
+      background: linear-gradient(145deg, #8b79ed, #6554ce);
+      box-shadow: 0 10px 24px rgba(101, 84, 206, .25);
+    }
+    h1 { margin: 0; font-size: clamp(25px, 6vw, 32px); letter-spacing: -.06em; }
+    .intro { margin: 12px 0 30px; color: #77738b; font-size: 15px; line-height: 1.7; }
+    form { text-align: left; }
+    label { display: block; margin: 0 0 9px 2px; font-size: 13px; font-weight: 700; color: #514d65; }
+    input {
+      width: 100%;
+      height: 54px;
+      padding: 0 16px;
+      border: 1px solid #e5e2ef;
+      border-radius: 14px;
+      outline: none;
+      background: #fff;
+      color: #28243b;
+      font: inherit;
+      font-size: 16px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    input::placeholder { color: #b2afbf; }
+    input:focus { border-color: #8170e3; box-shadow: 0 0 0 4px rgba(129, 112, 227, .13); }
+    button {
+      width: 100%;
+      height: 54px;
+      margin-top: 14px;
+      border: 0;
+      border-radius: 14px;
+      color: #fff;
+      background: #6e5bd1;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .15s, background .2s;
+    }
+    button:hover { background: #5c49c2; }
+    button:active { transform: scale(.985); }
+    button:focus-visible { outline: 3px solid #bdb3ff; outline-offset: 3px; }
+    #greeting {
+      min-height: 30px;
+      margin: 24px 0 0;
+      color: #5c49c2;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+    @media (max-width: 480px) { main { padding: 38px 25px 34px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark" aria-hidden="true">✦</div>
+    <h1>반가워요!</h1>
+    <p class="intro">이름을 알려주시면 따뜻한 인사를 건넬게요.</p>
+    <form id="welcome-form">
+      <label for="name">이름</label>
+      <input id="name" name="name" type="text" placeholder="이름을 입력해 주세요" autocomplete="name" required maxlength="40">
+      <button type="submit">인사 받기</button>
+    </form>
+    <p id="greeting" aria-live="polite"></p>
+  </main>
+  <script>
+    const form = document.querySelector('#welcome-form');
+    const nameInput = document.querySelector('#name');
+    const greeting = document.querySelector('#greeting');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const name = nameInput.value.trim();
+      if (!name) {
+        nameInput.focus();
+        return;
+      }
+      greeting.textContent = `${name} 님 어서오세요`;
+    });
+  </script>
+</body>
+</html>
